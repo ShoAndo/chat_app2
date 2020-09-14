@@ -1,0 +1,39 @@
+{% extends 'chat/base.html' %}
+
+{% block content %}
+
+<div class='chat-room-form'>
+  <h1>新規チャットルーム</h1>
+  <form action="" method="post">{% csrf_token %}
+    <div class='chat-room-form__field'>
+      <div class='chat-room-form__field--left'>
+        <label class="chat-room-form__label">チャットルーム名</label>
+      </div>
+      <div class='chat-room-form__field--right'>
+        <input type="text" class="chat__room_name chat-room-form__input" name="name", placeholder="チャットルーム名を入力してください">
+      </div>
+    </div>
+    <div class='chat-room-form__field'>
+    </div>
+    <div class='chat-room-form__field'>
+      <div class='chat-room-form__field--left'>
+        <label class='chat-room-form__label' for='chat_room_チャットメンバー'>チャットメンバー</label>
+      </div>
+      <div class='chat-room-form__field--right'>
+        <select name="user_id" multiple>
+          {% for user in users %}
+          <option value="{{ user.id }}">{{ user.username }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class='chat-room-form__field'>
+      <div class='chat-room-form__field--left'></div>
+      <div class='chat-room-form__field--right'>
+        <input type="submit" value="作成" class="chat-room-form__action-btn">
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

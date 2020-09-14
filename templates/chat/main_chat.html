@@ -1,0 +1,47 @@
+<div class="chat-header">
+  <div class="left-header">
+    <div class="header-title">
+      {{ room.name }}
+    </div>
+  </div>
+  <div class="right-header">
+    <div class="header-button">
+      <a href="{% url 'delete' room.id %}">チャットを終了する</a>
+    </div>
+  </div>
+</div>
+
+<div class="messages">
+  {% for message in messages %}
+  <div class="message">
+    <div class="upper-message">
+      <div class="message-user">
+        {{ message.user.username }}
+      </div>
+      <div class="message-date">
+        {{ message.created_at }}
+      </div>
+    </div>
+    <div class="lower-message">
+      <div class="message-content">
+        {{ message.content }}
+      </div>
+      {% if message.image %}
+      <img src="{{ message.image.url }}" class="message-image" style="height: 300px;" >
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<form class="form" action="{% url 'message' room.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+  <div class="form-input">
+    <input class="form-message" placeholder= "type a message" name="content">
+    <label class="form-image">
+      <span class="image-file">画像</span>
+      <input type="file" class="hidden" name="image">
+    </label>
+  </div>
+  <input class="form-submit" type="submit" value="送信">
+
+</form>

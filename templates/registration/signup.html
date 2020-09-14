@@ -1,0 +1,32 @@
+{% extends 'chat/base.html' %}
+
+{% block content %}
+<div class='account-page' id='account-page'>
+  <div class='account-page__inner clearfix'>
+    <div class='account-page__inner--left account-page__header'>
+      <h2>Create Account</h2>
+      <h5>新規アカウントの作成</h5>
+    </div>
+    <div class='account-page__inner--right user-form'>
+      <form action="{% url 'signup' %}" method="POST">{% csrf_token %}
+        <div class='field'>
+          <p>{{ form.username.label_tag }}</p>
+          <p>{{ form.username }}</p>
+        </div>
+        <div class='field'>
+          <p>{{ form.password1.label_tag }}</p>
+          <p>{{ form.password1 }}</p>
+        </div>
+        <div class='field'>
+          <p>{{ form.password2.label_tag }}</p>
+          <p>{{ form.password2 }}</p>
+        </div>
+
+        <div class='actions'>
+          <input type="submit" value="登録" class="btn">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
